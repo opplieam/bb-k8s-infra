@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: core-api
-          image: opplieam/bb-core-api:0.0.1-13b784a
+          image: opplieam/bb-core-api:0.0.1-4288a88
           imagePullPolicy: Always
           resources:
             requests:
