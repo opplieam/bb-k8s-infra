@@ -1,3 +1,5 @@
+---
+# Source: bb-core-api-chart/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -8,22 +10,22 @@ spec:
   selector:
     matchLabels:
       app: core-api
-  replicas: {{ .Values.replicas }}
+  replicas: 1
   template:
     metadata:
       labels:
         app: core-api
     spec:
-      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: 60
       containers:
         - name: core-api
-          image: {{ .Values.image }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: opplieam/bb-core-api:0.0.1-3966436
+          imagePullPolicy: Never
           resources:
             requests:
-              cpu: {{ .Values.resource.cpuRequest }}
+              cpu: 500m
             limits:
-              cpu: {{ .Values.resource.cpuLimit }}
+              cpu: 500m
           ports:
             - name: core-api-port
               containerPort: 3030
@@ -32,8 +34,8 @@ spec:
             httpGet:
               path: /v1/liveness
               port: 3030
-            initialDelaySeconds: {{ .Values.livenessInitialDelaySeconds }}
-            periodSeconds: {{ .Values.livenessPeriodSeconds }}
+            initialDelaySeconds: 2
+            periodSeconds: 5
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 4
@@ -42,8 +44,8 @@ spec:
             httpGet:
               path: /v1/readiness
               port: 3030
-            initialDelaySeconds: {{ .Values.readinessInitialDelaySeconds }}
-            periodSeconds: {{ .Values.readinessPeriodSeconds }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 4
@@ -71,15 +73,15 @@ spec:
                   fieldPath: metadata.namespace
 
             - name: WEB_SERVICE_ENV
-              value: {{ .Values.env.webService }}
+              value: cluster-dev
             - name: DB_DSN # dev local db is not sensitive
-              value: {{ .Values.env.dbDSN }}
+              value: postgresql://postgres:admin1234@host.minikube.internal:5433/buy-better-core?sslmode=disable
             - name: PRODUCT_SERVICE_ADDR
-              value: {{ .Values.env.prodServiceAddr }}
+              value: product-server-service.buy-better.svc.cluster.local:3031
             - name: GOOGLE_CALLBACK
-              value: {{ .Values.env.googleCallback }}
+              value: http://127.0.0.1:3030/v1/auth/google/callback
             - name: OTEL_EXPORTER_JAEGER_ENDPOINT
-              value: {{ .Values.env.jaegerEndpoint }}
+              value: http://host.minikube.internal:14268/api/traces
             - name: TOKEN_ENCODED
               valueFrom:
                 secretKeyRef:

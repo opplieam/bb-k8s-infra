@@ -1,0 +1,6 @@
+---
+# Source: bb-core-api-chart/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: buy-better
