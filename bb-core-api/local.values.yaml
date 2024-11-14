@@ -1,5 +1,5 @@
 image: opplieam/bb-core-api:0.0.1-0571850
-imagePullPolicy: Never
+imagePullPolicy: Always
 
 replicas: 1
 terminationGracePeriodSeconds: 60
