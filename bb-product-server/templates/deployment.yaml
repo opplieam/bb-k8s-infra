@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: product-server
-          image: opplieam/bb-product-server:0.0.1-a5fb256
+          image: opplieam/bb-product-server:0.0.1-53f5ea2
           imagePullPolicy: Always
           resources:
             requests:
