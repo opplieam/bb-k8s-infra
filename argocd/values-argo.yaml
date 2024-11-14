@@ -1,0 +1,13 @@
+configs:
+  secret:
+    # initial password : "password" (BCRYPT hash)
+    argocdServerAdminPassword: $2a$12$n4pjYaCeLFGvZcUhQ3.TYOm2cwUhFXxcAeXTBFdhxtsTKhRMMFfcq
+
+server:
+  resources:
+    requests:
+      cpu: "0.2"
+      memory: 200Mi
+    limits:
+      cpu: "0.5"
+      memory: 500Mi
