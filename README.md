@@ -4,6 +4,8 @@ This repository is designed to serve as a centralized location for Kubernetes re
 
 For example, in the case of `bb-core-api`: after a pull request is merged, `GitHub Actions` will build and push the images to Docker Hub. Subsequently, `Helm` will generate the YAML files with the specific image tag, which will then be pushed to this repository. `ArgoCD` will manage the deployment to the Kubernetes cluster.
 
+[Example of GitHub Actions that push files to this repository.](https://github.com/opplieam/bb-core-api/blob/main/.github/workflows/ci.yml)
+
 ### CI/CD Pipeline
 
 ![img](https://github.com/opplieam/bb-k8s-infra/blob/main/k8s.drawio.png?raw=true)
