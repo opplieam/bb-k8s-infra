@@ -21,10 +21,6 @@ This repository also includes Terraform IaC for provisioning and managing the GK
 - Router and NAT
 - Service Account and Roles
 
-### Certificate Management with Certificate Manager
-
-To ensure secure communication within the cluster, Certificate Manager is utilized to automate the issuance, rotation, and management of SSL/TLS certificates.
-
 [Example of GitHub Actions that push files to this repository.](https://github.com/opplieam/bb-core-api/blob/main/.github/workflows/ci.yml)
 
 ### CI/CD Pipeline
