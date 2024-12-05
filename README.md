@@ -1,8 +1,29 @@
 # Buy Better Kubernetes Infrastructure
 
-This repository is designed to serve as a centralized location for Kubernetes resources (YAML files). It utilizes `ArgoCD` to monitor and synchronize resources within the Kubernetes cluster. All resource files are generated from the original service repository.
+### Centralized Kubernetes Resource Repository
 
-For example, in the case of `bb-core-api`: after a pull request is merged, `GitHub Actions` will build and push the images to Docker Hub. Subsequently, `Helm` will generate the YAML files with the specific image tag, which will then be pushed to this repository. `ArgoCD` will manage the deployment to the Kubernetes cluster.
+This repository serves as a centralized hub for Kubernetes resource files (YAML) and Terraform Infrastructure as Code (IaC) for Google Kubernetes Engine (GKE). It leverages ArgoCD to monitor, synchronize, and deploy these resources to the Kubernetes cluster.
+
+### Automated Resource Management
+
+All Kubernetes resource files are automatically generated and managed through a CI/CD pipeline:
+
+- **Code Changes:** When a pull request for a service (e.g., `bb-core-api`) is merged, GitHub Actions triggers a build and pushes the new image to Docker Hub.
+- **Helm Chart Generation:** Helm generates updated YAML files with the specific image tag and commits them to this repository.
+- **ArgoCD Deployment:** ArgoCD detects the changes and automatically deploys the updated resources to the Kubernetes cluster.
+
+### Infrastructure as Code (IaC) with Terraform
+
+This repository also includes Terraform IaC for provisioning and managing the GKE cluster, including:
+
+- Networking configuration
+- Static IP for Ingress
+- Router and NAT
+- Service Account and Roles
+
+### Certificate Management with Certificate Manager
+
+To ensure secure communication within the cluster, Certificate Manager is utilized to automate the issuance, rotation, and management of SSL/TLS certificates.
 
 [Example of GitHub Actions that push files to this repository.](https://github.com/opplieam/bb-core-api/blob/main/.github/workflows/ci.yml)
 
