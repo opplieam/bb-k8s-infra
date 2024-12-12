@@ -1,0 +1,25 @@
+global:
+  domain: argocd.thanyasit.dev
+
+configs:
+  params:
+    server.insecure: true
+  secret:
+    argocdServerAdminPassword: $2a$12$n4pjYaCeLFGvZcUhQ3.TYOm2cwUhFXxcAeXTBFdhxtsTKhRMMFfcq # password
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - argocd.thanyasit.dev
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      kubernetes.io/tls-acme: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    extraTls:
+      - hosts:
+        - argocd.thanyasit.dev
+        # Based on the ingress controller used secret might be optional
+        secretName: argocd-server-tls

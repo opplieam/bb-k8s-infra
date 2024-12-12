@@ -39,15 +39,18 @@ install-issuer:
 uninstall-cert-manager:
 	helm uninstall cert-manager -n cert-manager
 
-install-argocd:
-	helm upgrade --install bb-argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values argocd/values-argo.yaml
+install-argocd-dev:
+	helm upgrade --install bb-argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values argocd/dev.values.yaml
+
+install-argocd-prod:
+	helm upgrade --install bb-argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values argocd/prod.values.yaml
 
 uninstall-argocd:
 	helm uninstall bb-argocd -n argocd
 
 
 initial-dev: ns install-sealed-secrets install-nginx
-initial-static: ns install-sealed-secrets install-nginx-static install-cert-manager install-issuer
+initial-static: ns install-sealed-secrets install-nginx-static install-cert-manager install-issuer install-argocd-prod
 
 # --------------- Utils --------------
 
